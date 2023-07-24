@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #4e98c6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 70px auto; /* Add margin to create a gap */
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 50vh;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  animation: neonError 2s linear infinite;
+}
+
+.error-message p {
+  margin: 0;
+}
+
+@keyframes neonError {
+  0% {
+    background-color: #f8d7da;
+  }
+  50% {
+    background-color: #ff394f;
+  }
+  100% {
+    background-color: #f8d7da;
+  }
+}

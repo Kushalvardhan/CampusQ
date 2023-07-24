@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/home.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+    <h1>All Questions</h1>
+
+    <div th:if="${confirmM != null}" class="calert">
+        <p th:text="${confirmM}"></p>
+    </div>
+
+    <div class="statement-list">
+        <div th:each="question : ${questions}" class="statement">
+            <div class="question-header">
+                <h3><span th:text="${question.student.toString()}"></span></h3>
+                <p class="created-at" th:text="${question.createdAt}"></p>
+            </div>
+
+            <p class="question-text" th:text="${question.description}"></p>
+            <div class="button-container">
+                <button class="btn btn-danger answer-btn" th:data-questionid="${question.questionId}">Answer</button>
+                <a class="btn btn-warning" th:href="@{/core/view_answers(questionId=${question.questionId})}">View Answers</a>
+                <a class="btn-admin-delete" th:href="@{/admin/admin_delete_question_home(questionId=${question.questionId})}" sec:authorize="hasRole('ROLE_ADMIN')" th:onclick="|showDeleteQuestionConfirmation('${question.questionId}')|">Delete</a>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay">
+    <div class="popup">
+        <h3>Answer the Question</h3>
+        <form th:action="@{/core/save_answer}" method="post">
+            <input type="hidden" name="questionId" class="question-id-input" th:value="${questionId}" />
+            <textarea class="expandable-textarea" placeholder="Your Answer" name="answerText"></textarea>
+            <button class="submit-answer-btn btn btn-primary" type="submit">Submit Answer</button>
+        </form>
+    </div>
+</div>
+
+<div class="pagination" th:if="${totalPages > 0}">
+    <a th:if="${currentPage > 1}" th:href="@{/core/home_view(page=${currentPage - 1})}">&lt;&lt;</a>
+    <a th:each="page : ${#numbers.sequence(1, totalPages)}"
+       th:href="@{/core/home_view(page=${page})}" th:class="${currentPage == page} ? 'active' : ''" th:text="${page}"></a>
+    <a th:if="${currentPage < totalPages}" th:href="@{/core/home_view(page=${currentPage + 1})}">&gt;&gt;</a>
+</div>
+
+
+<div th:replace="~{footer :: footer}"></div>
+
+
+<div id="deleteQuestionConfirmationPopup" class="popup-overlay">
+    <div class="popup">
+        <p>Are you sure you want to delete this question?</p>
+        <div class="button-container">
+            <a class="btn btn-danger" onclick="deleteQuestionConfirmed()">OK</a>
+            <a class="btn btn-primary" onclick="hideDeleteQuestionConfirmation()">Cancel</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript code to handle the popup functionality
+    document.addEventListener("DOMContentLoaded", function() {
+      var answerButtons = document.querySelectorAll(".answer-btn");
+      var popupOverlay = document.querySelector(".popup-overlay");
+      var popup = document.querySelector(".popup");
+      var textarea = document.querySelector(".expandable-textarea");
+      var questionIdInput = document.querySelector(".question-id-input");
+
+      // Open the popup when Answer button is clicked
+      answerButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+          var questionId = parseInt(button.getAttribute("data-questionid"));
+          questionIdInput.value = questionId;
+          popupOverlay.style.display = "flex";
+          textarea.focus();
+        });
+      });
+
+      // Close the popup when clicking outside of it
+      popupOverlay.addEventListener("click", function(event) {
+        if (event.target === popupOverlay) {
+          popupOverlay.style.display = "none";
+          textarea.value = "";
+          textarea.classList.remove("expanded");
+        }
+      });
+
+      // Expand the textarea when typing more than 3 lines of text
+      textarea.addEventListener("input", function() {
+        var lineHeight = parseInt(getComputedStyle(textarea).lineHeight);
+        var lines = textarea.scrollHeight / lineHeight;
+
+        if (lines > 3) {
+          textarea.classList.add("expanded");
+        } else {
+          textarea.classList.remove("expanded");
+        }
+      });
+    });
+
+    let questionIdToDelete;
+    let answerIdToDelete;
+
+    function showDeleteQuestionConfirmation(questionId) {
+      questionIdToDelete = questionId;
+      answerIdToDelete = null;
+      document.getElementById("deleteQuestionConfirmationPopup").style.display = "flex";
+    }
+
+    function deleteQuestionConfirmed() {
+      if (questionIdToDelete) {
+        const url = `/core/delete_question?questionId=${questionIdToDelete}`;
+        window.location.href = url;
+      }
+    }
+
+    function hideDeleteQuestionConfirmation() {
+      questionIdToDelete = null;
+      document.getElementById("deleteQuestionConfirmationPopup").style.display = "none";
+    }
+
+    function showDeleteAnswerConfirmation(answerId) {
+      questionIdToDelete = null;
+      answerIdToDelete = answerId;
+      document.getElementById("deleteAnswerConfirmationPopup").style.display = "flex";
+    }
+
+    function deleteAnswerConfirmed() {
+      if (answerIdToDelete) {
+        const url = `/core/delete_answer?answerId=${answerIdToDelete}`;
+        window.location.href = url;
+      }
+    }
+
+    function hideDeleteAnswerConfirmation() {
+      answerIdToDelete = null;
+      document.getElementById("deleteAnswerConfirmationPopup").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+

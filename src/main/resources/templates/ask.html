@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ask</title>
+  <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/ask.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="form-container">
+  <form th:action="@{/core/post_question}" class="form" th:object="${question}">
+
+    <h2>Ask the community</h2>
+
+    <div th:if="${errorM != null}" class="ealert">
+      <p th:text="${errorM}"></p>
+    </div>
+
+    <div class="form-group">
+      <textarea placeholder="Make sure your question is easily understandable and to the point." rows="10" th:field="*{description}"></textarea>
+    </div>
+
+    <div class="form-group">
+      <select th:field="*{tag}" id="tagSelect">
+        <option value="General" selected>General</option>
+        <option value="CSE">CSE</option>
+        <option value="Mech">Mech</option>
+        <option value="ECE">ECE</option>
+        <option value="CE">CE</option>
+        <option value="Chem">Chem</option>
+        <option value="EEE">EEE</option>
+        <option value="MME">MME</option>
+        <option value="Campus">Campus</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" id="postButton">Post</button>
+      <button type="reset">Clear</button>
+    </div>
+  </form>
+</div>
+
+<div th:replace="~{footer :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+  <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+</head>
+
+<body>
+
+<header class="fixed-top">
+  <h2>CampusQ</h2>
+
+  <nav>
+    <a th:href="@{/core/home_view}" sec:authorize="isAuthenticated()">Home</a>
+    <a th:href="@{/core/ask_question}" sec:authorize="isAuthenticated()">Ask</a>
+    <a th:href="@{/core/board?tag=General}" sec:authorize="isAuthenticated()">Board</a>
+    <a th:href="@{/login}" sec:authorize="isAnonymous()">Login</a>
+    <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
+    <a th:href="@{/profile}" class="active" sec:authorize="hasRole('ROLE_STUDENT')">Profile</a>
+    <a th:href="@{/profile}" class="active" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a>
+  </nav>
+
+</header>
+
+</body>
+
+</html>

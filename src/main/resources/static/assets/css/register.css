@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background: linear-gradient(135deg, #007bff, #29a5e0, #007bff);
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.form-wrapper {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px 30px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+h3 {
+  text-align: center;
+  color: #102f45;
+  margin-top: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.form input,
+.form button,
+.form select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.form button {
+  background-color: #4389C1;
+  color: white;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #356d8a;
+}
+
+.form input::placeholder,
+.form select::placeholder {
+  color: #999;
+}
+
+.form input[type="text"],
+.form input[type="tel"],
+.form input[type="email"],
+.form input[type="password"],
+.form select {
+  padding-left: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.form input[type="text"]:focus,
+.form input[type="tel"]:focus,
+.form input[type="email"]:focus,
+.form input[type="password"]:focus,
+.form select:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form .name-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form .name-container input {
+  flex: 1;
+}
+
+.form .row-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form .row-container input {
+  flex: 1;
+}
+
+.form .studentId-container,
+.form .branch-container {
+  flex: 1;
+  width: 100%;
+}
+
+.form .studentId-container input,
+.form .branch-container input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form .email-container,
+.form .password-container {
+  flex: 1;
+}
+
+.form .email-container input,
+.form .password-container input {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: calc(50% - 5px);
+}
+
+.message {
+  color: red;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.success {
+  background-color: #4CAF50;
+  color: #155724;
+  border: 1px solid #4CAF50;
+  font-weight: bold;
+}
+
+.failed {
+  background-color: #FF5252;
+  color: #721c24;
+  border: 1px solid #FF5252;
+  font-weight: bold;
+}
+
+.error-list {
+  color: red;
+  font-weight: bold;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.error-list li {
+  margin-bottom: 5px;
+}

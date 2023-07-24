@@ -1,0 +1,127 @@
+/* styles.css */
+
+/* Add your custom styles here */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container h1 {
+  color: #FFF; /* Changed the color to white */
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-family: "Roboto", sans-serif; /* Added font family */
+}
+
+.container .statement {
+  margin-bottom: 20px;
+  background-color: #E6F1FF;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0.1, 0.1, 0.1, 0.1);
+  font-family: "Roboto", sans-serif; /* Added font family */
+}
+
+.container .question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.container .created-at {
+  color: #888;
+  font-size: 14px;
+}
+
+.container .question-text {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #000011;
+}
+
+.container hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.container .tag-dropdown {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+}
+
+.container label {
+  color: #fff;
+  font-size: 18px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif; /* Added font family */
+}
+
+.container select {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #F5F5F5;
+  border: 1px solid #ccc;
+}
+
+.container .button-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container .btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #FF5252;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+}
+
+.container .btn:hover {
+  background-color: #FF0000;
+}
+
+.container p {
+  font-size: 16px;
+  color: #FFF; /* Changed the color to white */
+  margin-top: 10px;
+  text-align: justify;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold; /* Added font-weight property */
+}
+
+.container .warning-message {
+  color: #FFF;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+body {
+  background: linear-gradient(135deg, #007bff, #29a5e0, #007bff);
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/register.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+    <div class="form-wrapper">
+        <h3>Get Started: User Registration</h3>
+
+        <ul class="error-list">
+            <li th:each="error : ${#fields.errors('student.*')}" th:text="${error}"></li>
+        </ul>
+
+        <div th:if="${message != null}" class="message">
+            <p th:text="${message}" th:classappend="${success != null} ? 'success' : 'failed'"></p>
+        </div>
+
+        <form th:action="@{/register_user}" method="post" id="signup-form" class="form" th:object="${student}">
+            <div class="name-container">
+                <input type="text" th:field="*{firstName}" placeholder="First Name">
+                <input type="text" th:field="*{lastName}" placeholder="Last Name">
+            </div>
+            <div class="row-container">
+                <div class="studentId-container">
+                    <input type="text" th:field="*{studentId}" placeholder="Student ID">
+                </div>
+                <div class="branch-container">
+                    <select th:field="*{branch}">
+                        <option value="CSE">CSE</option>
+                        <option value="ECE">ECE</option>
+                        <option value="ME">ME</option>
+                        <option value="CE">CE</option>
+                        <option value="chem">Chem</option>
+                        <option value="EEE">EEE</option>
+                    </select>
+                </div>
+            </div>
+            <input type="text" th:field="*{email}" placeholder="Email">
+            <input type="password" th:field="*{password}" placeholder="Password">
+            <input type="password" th:field="*{confirmPwd}" placeholder="Confirm Password">
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+<div th:replace="~{footer :: footer}"></div>
+
+</body>
+</html>

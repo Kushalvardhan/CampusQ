@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/profile.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+  <div class="profile-card">
+    <div class="profile-info-left">
+      <h1>User Profile</h1>
+      <div class="profile-info">
+        <label>Student:</label>
+        <p th:text="${user.firstName} + ' ' + ${user.lastName}"></p>
+      </div>
+      <div class="profile-info">
+        <label>Student ID:</label>
+        <p th:text="${user.studentId}"></p>
+      </div>
+      <div class="profile-info">
+        <label>Branch:</label>
+        <p th:text="${user.branch}"></p>
+      </div>
+      <div class="profile-info">
+        <label>College mail id:</label>
+        <p th:text="${user.email}"></p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Questions Asked</h2>
+  <div class="statement-list">
+    <div th:each="question : ${userQuestions}" class="statement">
+      <p th:text="${question.description}"></p>
+      <div class="button-container">
+        <a class="btn btn-warning" th:href="@{/core/view_answers(questionId=${question.questionId})}">View
+          Answers</a>
+        <a class="btn btn-orange" th:onclick="|showDeleteQuestionConfirmation('${question.questionId}')|">Delete</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" th:if="${QueTotalPages > 0}">
+    <a th:if="${QueCurrentPage > 1}" th:href="@{/profile(page=${QueCurrentPage - 1})}">&lt;&lt;</a>
+    <a th:each="page : ${#numbers.sequence(1, QueTotalPages)}"
+       th:href="@{/profile(page=${page})}" th:class="${QueCurrentPage == page} ? 'active' : ''" th:text="${page}"></a>
+    <a th:if="${QueCurrentPage < QueTotalPages}" th:href="@{/profile(page=${QueCurrentPage + 1})}">&gt;&gt;</a>
+  </div>
+
+  <h2>My Answers</h2>
+  <div class="statement-list">
+    <div th:each="answer : ${userAnswers}" class="statement">
+      <p th:text="'Q : ' + ${answer.question.description}"></p>
+      <hr>
+      <p th:text="'A : ' + ${answer.description}"></p>
+      <div class="button-container">
+        <a class="btn btn-orange" th:onclick="|showDeleteAnswerConfirmation('${answer.answerId}')|">Delete</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" th:if="${AnsTotalPages > 0}">
+    <a th:if="${AnsCurrentPage > 1}" th:href="@{/profile(page=${AnsCurrentPage - 1})}">&lt;&lt;</a>
+    <a th:each="page : ${#numbers.sequence(1, AnsTotalPages)}"
+       th:href="@{/profile(page=${page})}" th:class="${AnsCurrentPage == page} ? 'active' : ''" th:text="${page}"></a>
+    <a th:if="${AnsCurrentPage < AnsTotalPages}" th:href="@{/profile(page=${AnsCurrentPage + 1})}">&gt;&gt;</a>
+  </div>
+
+</div>
+
+
+<div th:replace="~{footer :: footer}"></div>
+
+<div id="deleteQuestionConfirmationPopup" class="popup-overlay">
+  <div class="popup">
+    <p>Are you sure you want to delete this question?</p>
+    <div class="button-container">
+      <a class="btn btn-danger" onclick="deleteQuestionConfirmed()">OK</a>
+      <a class="btn btn-primary" onclick="hideDeleteQuestionConfirmation()">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<div id="deleteAnswerConfirmationPopup" class="popup-overlay">
+  <div class="popup">
+    <p>Warning! Are you sure you want to delete it? (Click Ok to Delete)</p>
+    <div class="button-container">
+      <a class="btn btn-danger" onclick="deleteAnswerConfirmed()">OK</a>
+      <a class="btn btn-primary" onclick="hideDeleteAnswerConfirmation()">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<script>
+    let questionIdToDelete;
+    let answerIdToDelete;
+
+    function showDeleteQuestionConfirmation(questionId) {
+      questionIdToDelete = questionId;
+      answerIdToDelete = null;
+      document.getElementById("deleteQuestionConfirmationPopup").style.display = "flex";
+    }
+
+    function deleteQuestionConfirmed() {
+      if (questionIdToDelete) {
+        const url = `/core/delete_question?questionId=${questionIdToDelete}`;
+        window.location.href = url;
+      }
+    }
+
+    function hideDeleteQuestionConfirmation() {
+      questionIdToDelete = null;
+      document.getElementById("deleteQuestionConfirmationPopup").style.display = "none";
+    }
+
+    function showDeleteAnswerConfirmation(answerId) {
+      questionIdToDelete = null;
+      answerIdToDelete = answerId;
+      document.getElementById("deleteAnswerConfirmationPopup").style.display = "flex";
+    }
+
+    function deleteAnswerConfirmed() {
+      if (answerIdToDelete) {
+        const url = `/core/delete_answer?answerId=${answerIdToDelete}`;
+        window.location.href = url;
+      }
+    }
+
+    function hideDeleteAnswerConfirmation() {
+      answerIdToDelete = null;
+      document.getElementById("deleteAnswerConfirmationPopup").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>

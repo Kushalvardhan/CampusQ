@@ -1,0 +1,339 @@
+/* home.css */
+
+body {
+  background: linear-gradient(135deg, #007bff, #29a5e0, #007bff);
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.statement-list {
+  margin-top: 12px;
+}
+
+.statement {
+  background-color: #E6F1FF;
+  border-radius: 10px;
+  padding: 13px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.question-header h3 {
+  color: #3B64B1;
+  font-family: 'Roboto', cursive, sans-serif;
+  font-size: 14px;
+  margin-right: 10px;
+
+}
+
+.question-header .created-at {
+  color: #888888;
+  font-size: 14px;
+}
+
+.question-text {
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: 'Roboto', cursive, sans-serif;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Style for Answer button */
+.button-container .btn-answer {
+  background-color: #ff8000; /* #3385ff; Attractive shade of blue */
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Hover effect for Answer button */
+.button-container .btn-answer:hover {
+  background-color: #ffbf00;
+  box-shadow: 0 4px 8px rgba(0, 133, 255, 0.3);
+}
+
+/* Style for View Answers button */
+.button-container .btn-view {
+  background-color: #ff4000; /*#ffc04d Attractive shade of yellow */
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Hover effect for View Answers button */
+.button-container .btn-view:hover {
+  background-color: #ff8000;
+  box-shadow: 0 4px 8px rgba(255, 192, 77, 0.3);
+}
+
+/* Style for Delete button */
+.button-container .btn-admin-delete {
+  background-color: #e60000; /* #ff6666 Attractive shade of red */
+  border: none;
+  border-radius: 5px;
+  padding: 9px 16px;
+  font-size: 14px;
+}
+
+/* Hover effect for Delete button */
+.button-container .btn-admin-delete:hover {
+  background-color: #ff4000;
+  box-shadow: 0 4px 8px rgba(255, 102, 102, 0.3);
+}
+
+/* Style for all buttons */
+.button-container button,
+.button-container a {
+  margin-left: 10px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+  vertical-align: middle;
+  box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Additional spacing between buttons */
+.button-container button:not(:last-child),
+.button-container a:not(:last-child) {
+  margin-right: 0 px;
+}
+
+
+.statement hr {
+  margin-top: 10px;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.popup h3 {
+  color: #3B64B1;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.popup textarea {
+  width: 95%;
+  height: 160px;
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.popup .submit-answer-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.popup .submit-answer-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.expandable-textarea {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.expandable-textarea.expanded {
+  height: 100px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 120px;
+}
+
+.pagination a {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #6ea6f8;
+  border: none;
+  border-radius: 20px;
+  margin: 0 2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.pagination a:hover {
+  background-color: #3c85e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pagination .prev:before {
+  content: '<<';
+  font-weight: bold;
+}
+
+.pagination .next:after {
+  content: '>>';
+  font-weight: bold;
+}
+
+.pagination .prev:before {
+  margin-right: 5px;
+}
+
+.pagination .next:after {
+  margin-left: 5px;
+}
+
+.pagination .page {
+  font-weight: bold;
+}
+
+.pagination .active {
+  background-color: #3c85e0;
+}
+
+
+.button-container button,
+.button-container a {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.button-container button:first-child,
+.button-container a:first-child {
+  margin-left: 0;
+}
+
+.button-container .btn-danger {
+  background-color: #FF5252;
+}
+
+.button-container .btn-warning {
+  background-color: #FFC107;
+}
+
+.button-container button:hover,
+.button-container a:hover {
+  opacity: 0.8;
+}
+
+.button-container .btn-warning:hover {
+  text-decoration: none;
+}
+
+.button-container .btn-danger,
+.button-container .btn-warning {
+  padding: 8px 16px;
+}
+
+.button-container .btn-danger {
+  background-color: #FF5252;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .btn-warning {
+  background-color: #FFC107;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .btn-danger:hover,
+.button-container .btn-warning:hover {
+  opacity: 0.8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calert {
+  background-color: #e6f1ff;
+  padding: 0.1px;
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  border-radius: 15px;
+  text-align: center;
+  color: #3B64B1;
+  font-style: italic;
+}
+

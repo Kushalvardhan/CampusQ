@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/answers.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+    <h1>Question</h1>
+    <div class="statement-list">
+        <div th:each="quest : ${question}" class="statement">
+            <div class="question-header">
+                <h3><span th:text="${quest.student.toString()}"></span></h3>
+                <p class="created-at" th:text="${quest.createdAt}"></p>
+            </div>
+            <hr>
+            <p class="question-text" th:text="${quest.description}"></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>All Answers</h1>
+
+    <div th:if="${confirmM != null}" class="calert">
+        <p th:text="${confirmM}"></p>
+    </div>
+
+    <div class="statement-list">
+        <div th:each="answer : ${answers}" class="statement">
+            <div class="answer-header">
+                <h3><span th:text="${answer.student.toString()}"></span></h3>
+                <p class="created-at" th:text="${answer.createdAt}"></p>
+            </div>
+            <hr>
+            <p class="answer-text" th:text="${answer.description}"></p>
+            <div class="button-container">
+                <a class="btn btn-warning" th:href="@{/admin/admin_delete_answer(questionId=${answer.question.questionId}, answerId=${answer.answerId})}" sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{footer :: footer}"></div>
+
+</body>
+</html>

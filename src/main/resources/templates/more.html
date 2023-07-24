@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/more.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+    <h1>Manage Question</h1>
+    <div class="statement-list">
+        <div class="statement">
+            <div class="question-header">
+                <h3><span th:text="${question.student.toString()}"></span></h3>
+                <p class="created-at" th:text="${question.createdAt}"></p>
+            </div>
+            <p class="question-text" th:text="${question.description}"></p>
+            <hr>
+        </div>
+    </div>
+    <!-- Dropdown for selecting the tag -->
+    <div class="tag-dropdown">
+        <label for="tag-select">Edit Tag:</label>
+        <select id="tag-select" onchange="location = this.value;">
+            <option value="/core/editTag?tag=General" th:selected="${question.questionId == 'General'}">General</option>
+            <option value="/core/editTag?tag=CSE" th:selected="${question.questionId == 'CSE'}">CSE</option>
+            <option value="/core/editTag?tag=ECE" th:selected="${question.questionId == 'ECE'}">ECE</option>
+            <option value="/core/editTag?tag=CE" th:selected="${question.questionId == 'CE'}">CE</option>
+            <option value="/core/editTag?tag=Mech" th:selected="${question.questionId == 'Mech'}">Mech</option>
+            <option value="/core/editTag?tag=EEE" th:selected="${question.questionId == 'EEE'}">EEE</option>
+            <option value="/core/editTag?tag=Chem" th:selected="${question.questionId == 'Chem'}">Chem</option>
+            <option value="/core/editTag?tag=MME" th:selected="${question.questionId == 'MME'}">MME</option>
+            <option value="/core/editTag?tag=Campus" th:selected="${question.questionId == 'Campus'}">Campus</option>
+        </select>
+    </div>
+
+    <div class="button-container">
+        <a class="btn btn-warning" th:href="@{/core/moreDelete(questionId=${question.questionId})}">Delete Question!</a>
+        <p>Warning!! all the answers for this question will also be deleted. This process cannot be undone.</p>
+    </div>
+</div>
+
+
+<div th:replace="~{footer :: footer}"></div>
+
+</body>
+</html>

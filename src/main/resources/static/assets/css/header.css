@@ -1,0 +1,56 @@
+header {
+  background-color: #E6F1FF;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Add border radius for a curvy look */
+  max-width: 1200px; /* Set a maximum width for the container */
+  margin: 20px auto 0; /* Center the container horizontally */
+  width: 1100px;
+}
+
+header h2 {
+  color: #3B64B1;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 28px;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+}
+
+nav a {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-family: 'Arial', sans-serif; /* Replace with the desired stylish font */
+}
+
+nav a.active {
+  background-color: #0056b3;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
+
+body {
+  background: linear-gradient(135deg, #007bff, #29a5e0, #007bff);
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
